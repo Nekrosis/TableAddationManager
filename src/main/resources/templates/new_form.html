@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Enter New Person</title>
+</head>
+<body>
+<div align="centre">
+    <h1>New Person</h1>
+    <br/>
+    <form action="#" th:action="@{/save}" th:object="${person}"
+          method="post">
+
+        <table border="4" cellpadding="10">
+            <tr>
+                <td>First Name</td>
+                <td><input type="text" th:field="*{firstName}"></td>
+            </tr>
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" th:field="*{lastName}"></td>
+            </tr>
+            <tr>
+                <td>Patronymic</td>
+                <td><input type="text" th:field="*{patronymic}"></td>
+            </tr>
+            <tr>
+                <td>Data of Birth</td>
+                <td><input type="date" th:field="*{birthday}"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><button type="submit">Save</button> </td>
+            </tr>
+        </table>
+    </form>
+</div>
+
+</body>
+</html>
