@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Information</title>
+</head>
+<body>
+<div align="centre">
+    <h1>Information</h1>
+    <br/>
+    <form action="#" th:action="@{/info/{id}(id=${person.id})}" th:object="${person}"
+          method="post">
+        <body>
+        <table>
+            <tr th:each="person : ${personList}">
+            <tr>
+                <td>ID:</td>
+                <td th:text="${person.id}"></td>
+            </tr>
+            <tr>
+                <td>First Name:</td>
+                <td th:text="${person.firstName}"></td>
+            </tr>
+            <tr>
+                <td>Last Name:</td>
+                <td th:text="${person.lastName}"></td>
+            </tr>
+            <tr>
+                <td>Patronymic:</td>
+                <td th:text="${person.patronymic}"></td>
+            </tr>
+            <tr>
+                <td>Data of Birth:</td>
+                <td th:text="${person.birthday}"></td>
+            </tr>
+            <tr>
+                <td>Sex:</td>
+                <td th:text="${person.sex}"></td>
+            </tr>
+            <tr>
+                <td>
+                    Partner:
+                </td>
+                <td th:text="${person.partner}"></td>
+            </tr>
+            <tr>
+                <td cosplan="2">
+                <button type="submit">
+                    <a th:href="@{/married}">Get Married</a>
+                </button>
+                </td>
+            </tr>
+        </table>
+        </body>
+    </form>
+</div>
+</body>
+</html>

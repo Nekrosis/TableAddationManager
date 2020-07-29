@@ -3,15 +3,15 @@ package com.example.table.service.controller;
 import com.example.table.service.Person;
 import com.example.table.service.PersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.zip.DataFormatException;
 
 @Controller
 public class AppController {
@@ -33,8 +33,7 @@ public class AppController {
     }
 
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("person") Person person)
-           {
+    public String save(@ModelAttribute("person") Person person) {
         dao.save(person);
 
         return "redirect:/";
@@ -45,4 +44,20 @@ public class AppController {
         dao.delete(id);
         return "redirect:/";
     }
+
+    @RequestMapping("/info/{id}")
+    public ModelAndView information(@PathVariable(name = "id") int id) {
+        ModelAndView mav = new ModelAndView("person_info");
+        Person person = dao.getPerson(id);
+        mav.addObject("person", person);
+        return mav;
+    }
+
+    @RequestMapping("/married")
+    public String married(Model model) {
+        List<Person> personList = dao.spouse();
+        model.addAttribute("personList",personList);
+        return "spouse";
+    }
 }
+

@@ -27,13 +27,15 @@
         <td th:text="${person.lastName}" Last Name></td>
         <td th:text="${person.patronymic}" Patronymic></td>
         <td th:text="${person.birthday}" Data of Birth></td>
-        <td>
-            <!--                        <a href="{'/edit/' + ${id}}">Edit</a>-->
-            <!--                        &nbsp;&nbsp;&nbsp;-->
-            <a th:href="@{/delete/{id}(id=${person.id})}">Delete</a>
+        <td colspan="2">
+            <button type="submit">
+                <a th:href="@{/info/{id}(id=${person.id})}">Info</a>
+            </button>
+            <button type="submit">
+                <a th:href="@{/delete/{id}(id=${person.id})}">Delete</a>
+            </button>
         </td>
-
-    </tr>
+        </tr>
     </tbody>
 </table>
 

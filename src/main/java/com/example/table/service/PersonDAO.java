@@ -24,7 +24,7 @@ public class PersonDAO {
 
     public void save(Person person) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
-        simpleJdbcInsert.withTableName("contacts").usingColumns("firstName", "lastName", "patronymic", "birthday");
+        simpleJdbcInsert.withTableName("contacts").usingColumns("firstName", "lastName", "patronymic", "birthday", "sex","partner");
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(person);
         simpleJdbcInsert.execute(parameterSource);
     }
@@ -37,8 +37,14 @@ public class PersonDAO {
         return person;
     }
 
-    public void update(Person person) {
+    public String inform(Person person) {
+        return null;
+    }
 
+        public List<Person> spouse() {
+        String sql = "SELECT * FROM contacts WHERE partner IS NULL ";
+        List<Person> personList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Person.class));
+        return personList;
     }
 
     public void delete(int id) {

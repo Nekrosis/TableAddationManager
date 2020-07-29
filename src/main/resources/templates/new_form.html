@@ -29,7 +29,22 @@
                 <td><input type="date" th:field="*{birthday}"></td>
             </tr>
             <tr>
-                <td colspan="2"><button type="submit">Save</button> </td>
+                <td>Sex</td>
+                <td>
+                    <ul>
+                        <form action="new_form.html" method="post">
+                            <p>
+                                <select name="sex">
+                                    <option disabled>Выберите пол</option>
+                                    <option th:each="sexOpt : ${T(com.example.table.service.Sex).values()}"
+                                            th:value="${sexOpt}" th:text="${sexOpt.sex}"></option>
+                                </select>
+                            </p>
+                        </form>
+            <tr>
+                <td colspan="2">
+                    <button type="submit">Save</button>
+                </td>
             </tr>
         </table>
     </form>
