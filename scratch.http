@@ -4,4 +4,11 @@ POST http://localhost:8080/save?firstName=qwe&lastName=rty&birthday=2020-02-15&s
 POST http://localhost:8080/save?firstName=asd&lastName=fgh&birthday=2019-02-15&sex=WOMEN
 ###
 
+POST http://localhost:8080/save?firstName=asd&lastName=fgh&birthday=2019-02-15&sex=WOMEN&partnerId=1
+###
+
 GET http://localhost:8080/save_married?id=1&partner_id=2
+###
+
+GET http://localhost:8080/
+###

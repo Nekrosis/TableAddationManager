@@ -17,33 +17,33 @@ public class PersonDAO {
 
     private final JdbcTemplate jdbcTemplate;
 
-    public List<Person> list() {
+    public List<PersonEntity> list() {
         String sql = "SELECT * FROM contacts";
-        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Person.class));
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(PersonEntity.class));
     }
 
-    public void save(Person person) {
+    public void save(PersonEntity person) {
         SimpleJdbcInsert simpleJdbcInsert = new SimpleJdbcInsert(jdbcTemplate);
         simpleJdbcInsert.withTableName("contacts").usingColumns("firstName", "lastName", "patronymic", "birthday", "sex", "partner");
         BeanPropertySqlParameterSource parameterSource = new BeanPropertySqlParameterSource(person);
         simpleJdbcInsert.execute(parameterSource);
     }
 
-    public Person getPerson(int id) {
+    public PersonEntity getPerson(int id) {
         String sql = "SELECT * FROM contacts WHERE id = ?";
         Object[] args = {id};
-        Person person = jdbcTemplate.queryForObject(sql, args,
-                BeanPropertyRowMapper.newInstance(Person.class));
+        PersonEntity person = jdbcTemplate.queryForObject(sql, args,
+                BeanPropertyRowMapper.newInstance(PersonEntity.class));
         return person;
     }
 
-    public String inform(Person person) {
+    public String inform(PersonEntity person) {
         return null;
     }
 
-    public List<Person> spouse() {
+    public List<PersonEntity> spouse() {
         String sql = "SELECT * FROM contacts WHERE partner IS NULL";
-        List<Person> personList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Person.class));
+        List<PersonEntity> personList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(PersonEntity.class));
         return personList;
     }
 
