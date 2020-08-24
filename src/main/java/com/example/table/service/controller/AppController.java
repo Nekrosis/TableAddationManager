@@ -5,10 +5,7 @@ import com.example.table.service.PersonDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -56,8 +53,25 @@ public class AppController {
     @RequestMapping("/married")
     public String married(Model model) {
         List<Person> personList = dao.spouse();
-        model.addAttribute("personList",personList);
+        model.addAttribute("personList", personList);
         return "spouse";
     }
+
+    @RequestMapping(value = "/save_married", method = RequestMethod.GET)
+//            params = {"id=partner", "partner =id"}, method = RequestMethod.GET)
+    public String saveMarried(@RequestParam("id") int id,
+                              @RequestParam("partner") Integer partnerId) {
+        dao.saveMarried(id, partnerId);
+        System.out.println("id: "+id+"partner: "+partnerId);
+        return "redirect:/";
+    }
+//    @GetMapping("/save_married")
+//    public String saveMarried(@RequestParam("id") int id,
+//                              @RequestParam("partner") int partnerId){
+//        dao.saveMarried(id,partnerId);
+//        System.out.println("id: "+id+"partner: "+partnerId);
+//        return "redirect:/";
+//    }
+
 }
 

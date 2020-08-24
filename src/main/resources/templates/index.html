@@ -17,6 +17,7 @@
         <th>Last Name</th>
         <th>Patronymic</th>
         <th>Data of Birth</th>
+        <th>Partner</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -27,6 +28,7 @@
         <td th:text="${person.lastName}" Last Name></td>
         <td th:text="${person.patronymic}" Patronymic></td>
         <td th:text="${person.birthday}" Data of Birth></td>
+        <td th:text="${person.partner}" Partner></td>
         <td colspan="2">
             <button type="submit">
                 <a th:href="@{/info/{id}(id=${person.id})}">Info</a>

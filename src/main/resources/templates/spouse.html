@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <title>Not married people</title>
     <h1>Not married people</h1>
-    <br/><br/>
+    <br/>
+    <form action="#" th:action="@{/save_married}" th:object="${partner}"
+    method="post">
     <table class="centre" border="5" cellpadding="10">
         <thead>
         <tr>
@@ -28,9 +30,12 @@
                 <button type="submit">
                     <a th:href="@{/info/{id}(id=${person.id})}">Info</a>
                 </button>
-                <button type="submit">Get married</button>
-             </td>
-
+                <button>
+<!--                   <a th:href='@{${spouse.url}(id=person.partner,partner=${person.id})}+${searchArguments}'> Get married</a>-->
+                   Get married
+                </button>
+            </td>
 </tbody>
     </table>
+    </form>
 </html>

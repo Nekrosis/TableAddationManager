@@ -21,5 +21,5 @@ public class Person {
     private LocalDate birthday;
     @JsonEnumDefaultValue
     private Sex sex;
-    private int partner;
+    private Integer partner;
 }
