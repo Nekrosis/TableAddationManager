@@ -2,7 +2,8 @@ package com.example.table.service.controller;
 
 import com.example.table.service.Person;
 import com.example.table.service.PersonDAO;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +11,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
+@Slf4j
 @Controller
+@RequiredArgsConstructor
 public class AppController {
-    @Autowired
-    private PersonDAO dao;
+
+    private final PersonDAO dao;
 
     @RequestMapping("/")
     public String viewHomePage(Model model) {
@@ -32,7 +35,6 @@ public class AppController {
     @RequestMapping(value = "/save", method = RequestMethod.POST)
     public String save(@ModelAttribute("person") Person person) {
         dao.save(person);
-
         return "redirect:/";
     }
 
@@ -57,21 +59,13 @@ public class AppController {
         return "spouse";
     }
 
-    @RequestMapping(value = "/save_married", method = RequestMethod.GET)
-//            params = {"id=partner", "partner =id"}, method = RequestMethod.GET)
+    @GetMapping(value = "/save_married", params = {"id", "partner_id"})
     public String saveMarried(@RequestParam("id") int id,
-                              @RequestParam("partner") Integer partnerId) {
+                              @RequestParam("partner_id") Integer partnerId) {
+        log.info("id: {}, partner_id: {}", id, partnerId);
         dao.saveMarried(id, partnerId);
-        System.out.println("id: "+id+"partner: "+partnerId);
         return "redirect:/";
     }
-//    @GetMapping("/save_married")
-//    public String saveMarried(@RequestParam("id") int id,
-//                              @RequestParam("partner") int partnerId){
-//        dao.saveMarried(id,partnerId);
-//        System.out.println("id: "+id+"partner: "+partnerId);
-//        return "redirect:/";
-//    }
 
 }
 

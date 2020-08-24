@@ -1,13 +1,15 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/test?useUnicode=true&serverTimezone=UTC
+    url: jdbc:mysql://localhost:3306/public?useUnicode=true&serverTimezone=UTC
 
 #    name: root
 #    password: 1234
     hikari:
       username: root
-      password: 1234
-      connection-test-query: SELECT 1 FROM contacts
+      password: root
+      connection-test-query: SELECT 1
   h2:
     console:
       enabled: true
+#  flyway:
+

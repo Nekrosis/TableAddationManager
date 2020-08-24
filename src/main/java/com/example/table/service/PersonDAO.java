@@ -1,10 +1,9 @@
 package com.example.table.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,14 +12,14 @@ import java.util.List;
 
 @Repository
 @Transactional
+@RequiredArgsConstructor
 public class PersonDAO {
-    @Autowired
-    private JdbcTemplate jdbcTemplate;
+
+    private final JdbcTemplate jdbcTemplate;
 
     public List<Person> list() {
         String sql = "SELECT * FROM contacts";
-        List<Person> personList = jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Person.class));
-        return personList;
+        return jdbcTemplate.query(sql, BeanPropertyRowMapper.newInstance(Person.class));
     }
 
     public void save(Person person) {
@@ -54,9 +53,11 @@ public class PersonDAO {
     }
 
     public void saveMarried(int id, int partnerId) {
-        String sql = "UPDATE contacts SET partner=? WHERE id=?";
-        jdbcTemplate.update(sql,partnerId,id);
-        return;
+        var sql = "UPDATE contacts SET partner=? WHERE id=?";
+        jdbcTemplate.batchUpdate(sql, List.of(
+                new Object[]{id, partnerId},
+                new Object[]{partnerId, id}
+        ));
 
     }
 }

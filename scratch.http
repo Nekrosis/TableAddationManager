@@ -1,0 +1,7 @@
+POST http://localhost:8080/save?firstName=qwe&lastName=rty&birthday=2020-02-15&sex=MAN
+###
+
+POST http://localhost:8080/save?firstName=asd&lastName=fgh&birthday=2019-02-15&sex=WOMEN
+###
+
+GET http://localhost:8080/save_married?id=1&partner_id=2
